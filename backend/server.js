@@ -12,7 +12,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api', routes);
-
+app.get('/', (req, res) => {
+  res.send('Bus Fees Portal Backend Running Successfully');
+});
 app.get('/health', (req, res) => res.json({ status: 'OK', timestamp: new Date() }));
 
 app.use((err, req, res, next) => {
