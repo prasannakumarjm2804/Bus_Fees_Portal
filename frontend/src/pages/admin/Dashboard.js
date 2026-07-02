@@ -42,31 +42,30 @@ export default function AdminDashboard() {
 
   return (
     <div>
-      {/* Welcome Banner */}
-      <div style={{
-        background: 'linear-gradient(135deg, #071630 0%, #0f3d8c 60%, #16803c 100%)',
-        borderRadius: 'var(--radius)', padding: '20px 26px', marginBottom: 24,
-        color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        flexWrap: 'wrap', gap: 12, boxShadow: '0 6px 24px rgba(15,61,140,0.2)'
+      <div className="card" style={{
+        marginBottom: 24,
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: 14,
       }}>
         <div>
-          <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 4, textTransform: 'uppercase', letterSpacing: 1 }}>KEC Bus Fees Portal — Administration</div>
-          <div style={{ fontSize: 22, fontWeight: 800, letterSpacing: -0.5 }}>
+          <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 4, textTransform: 'uppercase', fontWeight: 800 }}>Administration</div>
+          <div style={{ fontSize: 22, fontWeight: 800 }}>
             Kongu Engineering College
           </div>
-          <div style={{ fontSize: 13, opacity: 0.75, marginTop: 4 }}>
+          <div style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 4 }}>
             Bus Transportation Fee Management · {stats.currentMonth}
           </div>
         </div>
-        <div style={{ display: 'flex', gap: 10 }}>
-          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-            <button className="btn" style={{ background: 'rgba(255,255,255,0.15)', color: 'white', border: '1px solid rgba(255,255,255,0.2)' }} onClick={() => navigate('/admin/reports')}>
-              View Reports
-            </button>
-            <button className="btn" style={{ background: 'rgba(255,255,255,0.15)', color: 'white', border: '1px solid rgba(255,255,255,0.2)' }} onClick={() => navigate('/admin/fees')}>
-              Fee Records
-            </button>
-          </div>
+        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+          <button className="btn btn-outline" onClick={() => navigate('/admin/reports')}>
+            View Reports
+          </button>
+          <button className="btn btn-primary" onClick={() => navigate('/admin/fees')}>
+            Fee Records
+          </button>
         </div>
       </div>
 
@@ -96,19 +95,15 @@ export default function AdminDashboard() {
 
       {/* Quick Actions */}
       <div style={{ marginBottom: 24 }}>
-        <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-muted)', marginBottom: 12, textTransform: 'uppercase', letterSpacing: 1 }}>
+        <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--text-muted)', marginBottom: 12, textTransform: 'uppercase' }}>
           Quick Actions
         </div>
         <div className="quick-actions">
           {[
-            { label: 'Add Student', action: () => navigate('/admin/students') },
+            { label: 'Manage Students', action: () => navigate('/admin/students') },
             { label: 'Generate Fees', action: () => navigate('/admin/fees') },
+            { label: 'Overdue Fees', action: () => navigate('/admin/overdue') },
             { label: 'Reports', action: () => navigate('/admin/reports') },
-            { label: 'Upcoming Dues', action: () => navigate('/admin/upcoming') },
-            { label: 'Overdue List', action: () => navigate('/admin/overdue') },
-            { label: 'Support Tickets', action: () => navigate('/admin/support') },
-            { label: 'Concessions', action: () => navigate('/admin/concessions') },
-            { label: 'Fee Schedules', action: () => navigate('/admin/schedules') },
           ].map(a => (
             <div key={a.label} className="quick-action" onClick={a.action}>
               <span>{a.label}</span>
@@ -167,7 +162,7 @@ export default function AdminDashboard() {
       <div className="card" style={{ marginTop: 20 }}>
         <div className="card-header">
           <h3 className="card-title">Route-wise Summary — {stats.currentMonth}</h3>
-          <button className="btn btn-outline btn-sm" onClick={() => navigate('/admin/fees')}>View All Fees →</button>
+          <button className="btn btn-outline btn-sm" onClick={() => navigate('/admin/fees')}>View All Fees</button>
         </div>
         {routeBarData.length === 0 ? (
           <div className="empty-state">

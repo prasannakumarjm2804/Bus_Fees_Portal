@@ -79,14 +79,14 @@ export default function AdminProfile() {
 
       {msg.text && (
         <div className={`alert alert-${msg.type === 'success' ? 'success' : 'error'}`}>
-          {msg.type === 'success' ? '✅ ' : '⚠️ '}{msg.text}
+          {msg.text}
         </div>
       )}
 
       <div className="profile-grid">
         <div className="card">
           <div className="card-header">
-            <h3 className="card-title"><span>👤</span> Administrator Info</h3>
+            <h3 className="card-title">Administrator Info</h3>
           </div>
           <form onSubmit={handleSave}>
             <div className="form-group">
@@ -110,7 +110,7 @@ export default function AdminProfile() {
 
         <div className="card">
           <div className="card-header">
-            <h3 className="card-title"><span>🔒</span> Security & Privacy</h3>
+            <h3 className="card-title">Security & Privacy</h3>
           </div>
           <form onSubmit={handlePassword}>
             <div className="form-group">
@@ -135,7 +135,7 @@ export default function AdminProfile() {
 
         <div className="card" style={{ background: 'var(--surface2)' }}>
           <div className="card-header">
-            <h3 className="card-title"><span>⚡</span> System Permissions</h3>
+            <h3 className="card-title">System Permissions</h3>
           </div>
           <div className="info-list">
             <div className="info-row"><span>User Management</span><strong>Full Access</strong></div>

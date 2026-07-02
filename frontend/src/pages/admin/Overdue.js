@@ -23,7 +23,7 @@ export default function AdminOverdue() {
   const sendReminders = async () => {
     if (!selected.length) return notify('Select students first', 'error');
     await axios.post('/schedules/reminders', { feeIds: selected });
-    notify(`✅ Reminders sent to ${selected.length} students`);
+    notify(`Reminders sent to ${selected.length} students`);
     setSelected([]);
   };
 
@@ -48,21 +48,21 @@ export default function AdminOverdue() {
       {msg.text && <div className={`alert alert-${msg.type==='error'?'error':'success'}`}>{msg.text}</div>}
 
       <div className="stats-grid" style={{ marginBottom:20 }}>
-        <div className="stat-card red"><span className="stat-icon">⚠️</span><div className="stat-label">Overdue Count</div><div className="stat-value">{fees.length}</div></div>
-        <div className="stat-card red"><span className="stat-icon">💸</span><div className="stat-label">Total Overdue</div><div className="stat-value" style={{ fontSize:20 }}>{fmt(totalOverdue)}</div></div>
+        <div className="stat-card red"><div className="stat-label">Overdue Count</div><div className="stat-value">{fees.length}</div></div>
+        <div className="stat-card red"><div className="stat-label">Total Overdue</div><div className="stat-value" style={{ fontSize:20 }}>{fmt(totalOverdue)}</div></div>
       </div>
 
       <div style={{ display:'flex', gap:10, marginBottom:20, flexWrap:'wrap' }}>
         {selected.length > 0 && <>
-          <button className="btn btn-warning" onClick={sendReminders}>🔔 Send Reminders ({selected.length})</button>
+          <button className="btn btn-warning" onClick={sendReminders}>Send Reminders ({selected.length})</button>
         </>}
         <button className="btn btn-outline btn-sm" onClick={toggleAll}>{selected.length === fees.length ? 'Deselect All' : 'Select All'}</button>
       </div>
 
       <div className="card">
-        <div className="card-header"><h3 className="card-title">⚠️ Overdue Fees ({fees.length})</h3></div>
+        <div className="card-header"><h3 className="card-title">Overdue Fees ({fees.length})</h3></div>
         {fees.length === 0 ? (
-          <div className="empty-state"><span className="icon">🎉</span><h3>No overdue fees!</h3><p>All payments are current</p></div>
+          <div className="empty-state"><h3>No overdue fees</h3><p>All payments are current</p></div>
         ) : (
           <div className="table-wrap">
             <table>
@@ -89,7 +89,7 @@ export default function AdminOverdue() {
                       </td>
                       <td>
                         <button className="btn btn-success btn-sm" onClick={() => { setShowCollect(f); setPayForm({ paymentMode:'cash', transactionId:'', lateFee: Math.min(days*10, 200), discount:0, remarks:`Overdue by ${days} days` }); }}>
-                          💳 Collect
+                          Collect
                         </button>
                       </td>
                     </tr>
@@ -105,13 +105,13 @@ export default function AdminOverdue() {
         <div className="modal-overlay" onClick={e => e.target===e.currentTarget && setShowCollect(null)}>
           <div className="modal modal-sm">
             <div className="modal-header">
-              <h3 className="modal-title">💳 Collect Overdue Payment</h3>
-              <button className="modal-close" onClick={() => setShowCollect(null)}>×</button>
+              <h3 className="modal-title">Collect Overdue Payment</h3>
+              <button className="modal-close" onClick={() => setShowCollect(null)}>X</button>
             </div>
             <div style={{ background:'#fff5f5', border:'1px solid #fecaca', borderRadius:10, padding:14, marginBottom:16, fontSize:13 }}>
               <div><strong>Student:</strong> {showCollect.student?.user?.name}</div>
               <div><strong>Month:</strong> {showCollect.feeMonth} | <strong>Base:</strong> ₹{showCollect.amount}</div>
-              <div style={{ color:'var(--danger)', marginTop:4 }}><strong>⚠️ Overdue by {daysPast(showCollect.dueDate)} days</strong></div>
+              <div style={{ color:'var(--danger)', marginTop:4 }}><strong>Overdue by {daysPast(showCollect.dueDate)} days</strong></div>
             </div>
             <form onSubmit={handleCollect}>
               <div className="form-row">
@@ -126,7 +126,7 @@ export default function AdminOverdue() {
                 Total: ₹{(Number(showCollect.amount)+Number(payForm.lateFee)-Number(payForm.discount)).toLocaleString()}
               </div>
               <div style={{ display:'flex', gap:10 }}>
-                <button type="submit" className="btn btn-success" style={{ flex:1, justifyContent:'center' }}>✅ Confirm Payment</button>
+                <button type="submit" className="btn btn-success" style={{ flex:1, justifyContent:'center' }}>Confirm Payment</button>
                 <button type="button" className="btn btn-outline" onClick={() => setShowCollect(null)}>Cancel</button>
               </div>
             </form>

@@ -41,7 +41,7 @@ export default function AdminSchedules() {
         const fees = r.data.feesGenerated || 0;
         notify(fees > 0
           ? `Schedule created. ${fees} student fee(s) generated and notified.`
-          : 'Schedule created. No new fees generated — ensure students have matching fee type and route.');
+          : 'Schedule created. No new fees generated - ensure students have matching fee type and route.');
       }
       setShowModal(false); fetch();
     } catch (err) { notify(err.response?.data?.message || 'Error', 'error'); }
@@ -76,13 +76,13 @@ export default function AdminSchedules() {
         <div className="alert alert-info" style={{ flex:1, marginBottom:0, marginRight:16 }}>
           Creating a monthly, term, or annual schedule automatically generates pending fee records for matching students. Students must have the same fee type and an assigned route.
         </div>
-        <button className="btn btn-primary" onClick={openCreate}>➕ New Schedule</button>
+        <button className="btn btn-primary" onClick={openCreate}>New Schedule</button>
       </div>
 
       <div className="card">
-        <div className="card-header"><h3 className="card-title">📅 Payment Schedules ({schedules.length})</h3></div>
+        <div className="card-header"><h3 className="card-title">Payment Schedules ({schedules.length})</h3></div>
         {schedules.length === 0 ? (
-          <div className="empty-state"><span className="icon">📅</span><h3>No schedules yet</h3><p>Create payment schedules to manage fee due dates and late fees</p></div>
+          <div className="empty-state"><h3>No schedules yet</h3><p>Create payment schedules to manage fee due dates and late fees</p></div>
         ) : (
           <div className="table-wrap">
             <table>
@@ -108,7 +108,7 @@ export default function AdminSchedules() {
                       {s.lateFeeFixed == 0 && s.lateFeePerDay == 0 && <span style={{ color:'var(--text-muted)' }}>No late fee</span>}
                     </td>
                     <td>{s.reminderDaysBefore} days before</td>
-                    <td><span className={`badge badge-${s.isActive ? 'active' : 'inactive'}`}>{s.isActive ? '✅ Active' : '❌ Inactive'}</span></td>
+                    <td><span className={`badge badge-${s.isActive ? 'active' : 'inactive'}`}>{s.isActive ? 'Active' : 'Inactive'}</span></td>
                     <td>
                       <div style={{ display:'flex', gap:6 }}>
                         {s.scheduleType !== 'custom' && s.isActive && (
@@ -130,8 +130,8 @@ export default function AdminSchedules() {
         <div className="modal-overlay" onClick={e => e.target === e.currentTarget && setShowModal(false)}>
           <div className="modal modal-lg">
             <div className="modal-header">
-              <h3 className="modal-title">{editItem ? '✏️ Edit Schedule' : '📅 New Payment Schedule'}</h3>
-              <button className="modal-close" onClick={() => setShowModal(false)}>×</button>
+              <h3 className="modal-title">{editItem ? 'Edit Schedule' : 'New Payment Schedule'}</h3>
+              <button className="modal-close" onClick={() => setShowModal(false)}>X</button>
             </div>
             <form onSubmit={handleSubmit}>
               <div className="form-row">
@@ -161,13 +161,13 @@ export default function AdminSchedules() {
                 <div className="form-group"><label>Start Date *</label><input type="date" value={form.startDate} onChange={e => setForm({...form, startDate:e.target.value})} required /></div>
                 <div className="form-group"><label>End Date</label><input type="date" value={form.endDate} onChange={e => setForm({...form, endDate:e.target.value})} /></div>
               </div>
-              <div className="form-section-title">⏱️ Grace Period & Late Fees</div>
+              <div className="form-section-title">Grace Period & Late Fees</div>
               <div className="form-row">
                 <div className="form-group"><label>Grace Period (days)</label><input type="number" min="0" value={form.gracePeriodDays} onChange={e => setForm({...form, gracePeriodDays:e.target.value})} /></div>
                 <div className="form-group"><label>Fixed Late Fee (₹)</label><input type="number" min="0" step="0.01" value={form.lateFeeFixed} onChange={e => setForm({...form, lateFeeFixed:e.target.value})} /></div>
                 <div className="form-group"><label>Late Fee Per Day (₹)</label><input type="number" min="0" step="0.01" value={form.lateFeePerDay} onChange={e => setForm({...form, lateFeePerDay:e.target.value})} /></div>
               </div>
-              <div className="form-group"><label>🔔 Reminder Days Before Due</label>
+              <div className="form-group"><label>Reminder Days Before Due</label>
                 <input type="number" min="1" max="30" value={form.reminderDaysBefore} onChange={e => setForm({...form, reminderDaysBefore:e.target.value})} />
                 <div style={{ fontSize:11, color:'var(--text-muted)', marginTop:4 }}>Students will be notified this many days before the due date</div>
               </div>

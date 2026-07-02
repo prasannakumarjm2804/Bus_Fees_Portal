@@ -24,7 +24,7 @@ export default function AdminUpcoming() {
     setSending(true);
     try {
       const r = await axios.post('/schedules/reminders', { feeIds: selected });
-      notify(`✅ ${r.data.message}`);
+      notify(r.data.message);
       setSelected([]);
     } catch { notify('Failed to send reminders', 'error'); }
     finally { setSending(false); }
@@ -44,24 +44,24 @@ export default function AdminUpcoming() {
       {msg.text && <div className={`alert alert-${msg.type === 'error' ? 'error' : 'success'}`}>{msg.text}</div>}
       <div style={{ display:'flex', gap:12, marginBottom:20, flexWrap:'wrap', alignItems:'center' }}>
         <div className="alert alert-warning" style={{ flex:1, marginBottom:0 }}>
-          ⏰ Showing {fees.length} fees due in the next 30 days
+          Showing {fees.length} fees due in the next 30 days
         </div>
         {selected.length > 0 && (
           <button className="btn btn-warning" onClick={sendReminders} disabled={sending}>
-            {sending ? '⏳ Sending...' : `🔔 Send Reminder (${selected.length})`}
+            {sending ? 'Sending...' : `Send Reminder (${selected.length})`}
           </button>
         )}
       </div>
 
       <div className="card">
         <div className="card-header">
-          <h3 className="card-title">⏰ Upcoming Due Fees</h3>
+          <h3 className="card-title">Upcoming Due Fees</h3>
           <div style={{ display:'flex', gap:8 }}>
             <button className="btn btn-outline btn-sm" onClick={toggleAll}>{selected.length === fees.length ? 'Deselect All' : 'Select All'}</button>
           </div>
         </div>
         {fees.length === 0 ? (
-          <div className="empty-state"><span className="icon">🎉</span><h3>No upcoming dues!</h3><p>All fees are up to date for the next 30 days</p></div>
+          <div className="empty-state"><h3>No upcoming dues</h3><p>All fees are up to date for the next 30 days</p></div>
         ) : (
           <div className="table-wrap">
             <table>
@@ -86,7 +86,7 @@ export default function AdminUpcoming() {
                         </span>
                       </td>
                       <td>
-                        <button className="btn btn-outline btn-sm" onClick={() => { setSelected([f.id]); setSending(false); }}>🔔 Remind</button>
+                        <button className="btn btn-outline btn-sm" onClick={() => { setSelected([f.id]); setSending(false); }}>Remind</button>
                       </td>
                     </tr>
                   );

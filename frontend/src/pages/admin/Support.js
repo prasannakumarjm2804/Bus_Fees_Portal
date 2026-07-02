@@ -99,7 +99,7 @@ export default function AdminSupport() {
           <div className="modal" onClick={e => e.stopPropagation()}>
             <div className="modal-header">
               <h3>Ticket #{selected.id}: {selected.subject}</h3>
-              <button className="modal-close" onClick={() => setSelected(null)}>×</button>
+              <button className="modal-close" onClick={() => setSelected(null)}>X</button>
             </div>
             <div className="modal-body">
               <p className="text-muted" style={{ marginBottom: 12 }}>{selected.message}</p>

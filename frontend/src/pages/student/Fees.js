@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import PaymentModal from '../../components/student/PaymentModal';
+import { useAuth } from '../../context/AuthContext';
 
 export default function StudentFees() {
+  const { user } = useAuth();
   const [fees, setFees] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedFee, setSelectedFee] = useState(null);
@@ -120,14 +122,14 @@ export default function StudentFees() {
         <div className="modal-overlay" onClick={e => e.target === e.currentTarget && setSelectedFee(null)}>
           <div className="modal" style={{ maxWidth: 420 }}>
             <div className="modal-header">
-              <h3 className="modal-title">🧾 Payment Receipt</h3>
-              <button className="modal-close" onClick={() => setSelectedFee(null)}>×</button>
+              <h3 className="modal-title">Payment Receipt</h3>
+              <button className="modal-close" onClick={() => setSelectedFee(null)}>X</button>
             </div>
             <div className="receipt">
               <div className="receipt-header">
                 <div style={{
                   width: 48, height: 48, borderRadius: 12, margin: '0 auto 10px',
-                  background: 'linear-gradient(135deg, #0f3d8c, #16803c)',
+                  background: 'var(--primary)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   color: 'white', fontWeight: 800, fontSize: 14
                 }}>KEC</div>
@@ -152,7 +154,7 @@ export default function StudentFees() {
               </div>
             </div>
             <button className="btn btn-primary" style={{ width: '100%', marginTop: 14, justifyContent: 'center' }} onClick={() => window.print()}>
-              🖨️ Print Receipt
+              Print Receipt
             </button>
           </div>
         </div>

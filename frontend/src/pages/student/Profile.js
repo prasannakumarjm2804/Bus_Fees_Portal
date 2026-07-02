@@ -82,8 +82,8 @@ export default function StudentProfile() {
           <h2>{form.name}</h2>
           <p>{profile?.studentId} · {profile?.department} · Year {profile?.year}</p>
           <div className="profile-badges">
-            <span className="kec-badge">🎓 Student</span>
-            {profile?.route && <span className="badge badge-route">🚌 Route {profile.route.routeNumber}</span>}
+            <span className="kec-badge">Student</span>
+            {profile?.route && <span className="badge badge-route">Route {profile.route.routeNumber}</span>}
             <span className="badge badge-paid">Active</span>
           </div>
         </div>
@@ -91,14 +91,14 @@ export default function StudentProfile() {
 
       {msg.text && (
         <div className={`alert alert-${msg.type === 'success' ? 'success' : 'error'}`}>
-          {msg.type === 'success' ? '✅ ' : '⚠️ '}{msg.text}
+          {msg.text}
         </div>
       )}
 
       <div className="profile-grid">
         <div className="card">
           <div className="card-header">
-            <h3 className="card-title"><span>📝</span> Personal & Contact Info</h3>
+            <h3 className="card-title">Personal & Contact Info</h3>
           </div>
           <form onSubmit={handleSave}>
             <div className="form-group">
@@ -131,7 +131,7 @@ export default function StudentProfile() {
 
         <div className="card">
           <div className="card-header">
-            <h3 className="card-title"><span>🔒</span> Security Settings</h3>
+            <h3 className="card-title">Security Settings</h3>
           </div>
           <form onSubmit={handlePassword}>
             <div className="form-group">
@@ -156,7 +156,7 @@ export default function StudentProfile() {
 
         <div className="card">
           <div className="card-header">
-            <h3 className="card-title"><span>🏛️</span> Academic Details</h3>
+            <h3 className="card-title">Academic Details</h3>
             <span className="readonly-tag">Verified</span>
           </div>
           <div className="info-list">
@@ -177,7 +177,7 @@ export default function StudentProfile() {
         {profile?.route && (
           <div className="card">
             <div className="card-header">
-              <h3 className="card-title"><span>🚌</span> Transport Details</h3>
+              <h3 className="card-title">Transport Details</h3>
             </div>
             <div className="route-visual" style={{ marginBottom: 20 }}>
               <div className="route-stop"><span>Origin</span><strong>{profile.route.startPoint}</strong></div>

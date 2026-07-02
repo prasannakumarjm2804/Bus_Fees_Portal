@@ -94,7 +94,6 @@ export default function AdminStudents() {
       {msg && <div className={`alert ${msg.includes('Error') || msg.includes('already') ? 'alert-error' : 'alert-success'}`} onClick={() => setMsg('')}>{msg}</div>}
       <div className="search-bar">
         <div className="search-wrap" style={{ flex: 2 }}>
-          <span className="search-icon">🔍</span>
           <input className="search-input" placeholder="Search by name or email..." value={search} onChange={e => { setSearch(e.target.value); setPage(1); }} />
         </div>
         <select className="filter-select" value={filterRoute} onChange={e => { setFilterRoute(e.target.value); setPage(1); }}>
@@ -106,14 +105,14 @@ export default function AdminStudents() {
           <option value="self">Self Registered</option>
           <option value="admin">Admin Added</option>
         </select>
-        <button className="export-btn" onClick={exportCSV} title="Export student list as CSV">📥 Export CSV</button>
-        <button className="btn btn-primary" onClick={openCreate}>➕ Add Student</button>
+        <button className="export-btn" onClick={exportCSV} title="Export student list as CSV">Export CSV</button>
+        <button className="btn btn-primary" onClick={openCreate}>Add Student</button>
       </div>
 
       <div className="card">
         <div className="card-header">
           <h3 className="card-title">
-            <span>🎓</span> KEC Bus Students
+            KEC Bus Students
             <span style={{ fontWeight: 500, color: 'var(--text-muted)', fontSize: 13 }}>({total} enrolled)</span>
           </h3>
         </div>
@@ -144,8 +143,8 @@ export default function AdminStudents() {
                   <td style={{ fontSize: 12 }}>{s.user?.phone || '—'}</td>
                   <td>
                     <div style={{ display: 'flex', gap: 6 }}>
-                      <button className="btn btn-outline btn-sm" onClick={() => openEdit(s)}>✏️</button>
-                      <button className="btn btn-danger btn-sm" onClick={() => handleDelete(s.id)}>🗑️</button>
+                      <button className="btn btn-outline btn-sm" onClick={() => openEdit(s)}>Edit</button>
+                      <button className="btn btn-danger btn-sm" onClick={() => handleDelete(s.id)}>Deactivate</button>
                     </div>
                   </td>
                 </tr>
@@ -169,8 +168,8 @@ export default function AdminStudents() {
         <div className="modal-overlay" onClick={e => e.target === e.currentTarget && setShowModal(false)}>
           <div className="modal">
             <div className="modal-header">
-              <h3 className="modal-title">{editStudent ? '✏️ Edit Student' : '➕ Add New Student'}</h3>
-              <button className="modal-close" onClick={() => setShowModal(false)}>×</button>
+              <h3 className="modal-title">{editStudent ? 'Edit Student' : 'Add New Student'}</h3>
+              <button className="modal-close" onClick={() => setShowModal(false)}>X</button>
             </div>
             <form onSubmit={handleSubmit}>
               <div style={{ fontWeight: 700, fontSize: 12, color: 'var(--text-muted)', marginBottom: 12, textTransform: 'uppercase' }}>Account Info</div>

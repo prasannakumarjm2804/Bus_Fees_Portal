@@ -34,7 +34,7 @@ export default function AdminRoutes() {
       </button>
       {msg && <div className="alert alert-success" onClick={() => setMsg('')}>{msg}</div>}
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 16 }}>
-        <button className="btn btn-primary" onClick={openCreate}>➕ Add Route</button>
+        <button className="btn btn-primary" onClick={openCreate}>Add Route</button>
       </div>
       <div className="card">
         <div className="card-header"><h3 className="card-title">Bus Routes ({routes.length})</h3></div>
@@ -43,7 +43,7 @@ export default function AdminRoutes() {
             <thead><tr><th>Route No.</th><th>Route Name</th><th>From → To</th><th>Distance</th><th>Monthly Fee</th><th>Term Fee</th><th>Students</th><th>Actions</th></tr></thead>
             <tbody>
               {routes.length === 0 ? (
-                <tr><td colSpan={8}><div className="empty-state"><span className="icon">🗺️</span><p>No routes added yet</p></div></td></tr>
+                <tr><td colSpan={8}><div className="empty-state"><p>No routes added yet</p></div></td></tr>
               ) : routes.map(r => (
                 <tr key={r.id}>
                   <td><strong style={{ background: '#dbeafe', color: '#1d4ed8', padding: '2px 8px', borderRadius: 20, fontSize: 12 }}>{r.routeNumber}</strong></td>
@@ -55,8 +55,8 @@ export default function AdminRoutes() {
                   <td><span className="badge" style={{ background: '#f0fdf4', color: '#15803d' }}>{r.studentCount || 0}</span></td>
                   <td>
                     <div style={{ display: 'flex', gap: 6 }}>
-                      <button className="btn btn-outline btn-sm" onClick={() => openEdit(r)}>✏️</button>
-                      <button className="btn btn-danger btn-sm" onClick={() => handleDelete(r.id)}>🗑️</button>
+                      <button className="btn btn-outline btn-sm" onClick={() => openEdit(r)}>Edit</button>
+                      <button className="btn btn-danger btn-sm" onClick={() => handleDelete(r.id)}>Deactivate</button>
                     </div>
                   </td>
                 </tr>
@@ -70,8 +70,8 @@ export default function AdminRoutes() {
         <div className="modal-overlay" onClick={e => e.target === e.currentTarget && setShowModal(false)}>
           <div className="modal">
             <div className="modal-header">
-              <h3 className="modal-title">{editRoute ? '✏️ Edit Route' : '🗺️ Add New Route'}</h3>
-              <button className="modal-close" onClick={() => setShowModal(false)}>×</button>
+              <h3 className="modal-title">{editRoute ? 'Edit Route' : 'Add New Route'}</h3>
+              <button className="modal-close" onClick={() => setShowModal(false)}>X</button>
             </div>
             <form onSubmit={handleSubmit}>
               <div className="form-row">

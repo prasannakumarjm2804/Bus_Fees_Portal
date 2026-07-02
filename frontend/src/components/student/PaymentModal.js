@@ -41,7 +41,7 @@ export default function PaymentModal({ fee, onClose, onSuccess }) {
           <>
             <div className="payment-success">
               <div className="payment-success-icon">✓</div>
-              <h3>Payment Successful! 🎉</h3>
+              <h3>Payment Successful</h3>
               <p>Your KEC bus fee has been paid and a digital receipt has been generated.</p>
             </div>
             <div className="payment-summary">
@@ -53,7 +53,7 @@ export default function PaymentModal({ fee, onClose, onSuccess }) {
             <div style={{ textAlign: 'center', fontSize: 12, color: 'var(--text-muted)', marginBottom: 16 }}>
               Kongu Engineering College — Bus Transportation Department
             </div>
-            <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={onClose}>Done ✓</button>
+            <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={onClose}>Done</button>
           </>
         ) : step === 'processing' ? (
           <div className="payment-processing">
@@ -64,7 +64,7 @@ export default function PaymentModal({ fee, onClose, onSuccess }) {
         ) : (
           <>
             <div className="modal-header">
-              <h3 className="modal-title">🚌 Pay Bus Fee — KEC</h3>
+              <h3 className="modal-title">Pay Bus Fee - KEC</h3>
               <button className="modal-close" onClick={onClose}>×</button>
             </div>
 
@@ -90,7 +90,7 @@ export default function PaymentModal({ fee, onClose, onSuccess }) {
             </div>
 
             <div className="payment-note">
-              🔒 Payments are processed securely by KEC Bus Transportation. A digital receipt will be generated immediately upon confirmation. For payment issues, contact: <strong>transport@kec.ac.in</strong>
+              Payments are processed securely by KEC Bus Transportation. A digital receipt will be generated immediately upon confirmation. For payment issues, contact: <strong>transport@kec.ac.in</strong>
             </div>
 
             <div className="payment-actions">

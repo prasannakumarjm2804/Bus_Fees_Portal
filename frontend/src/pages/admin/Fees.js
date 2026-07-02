@@ -46,7 +46,7 @@ export default function AdminFees() {
     e.preventDefault();
     try {
       await axios.put(`/fees/${selectedFee.id}/collect`, payForm);
-      notify('✅ Payment recorded successfully!');
+      notify('Payment recorded successfully.');
       setShowPayModal(false); fetchFees();
     } catch (err) { notify(err.response?.data?.message || 'Error occurred', 'error'); }
   };
@@ -56,7 +56,7 @@ export default function AdminFees() {
     try {
       const r = await axios.post('/fees/generate', genForm);
       setGenResult(r.data);
-      notify(`✅ ${r.data.message}`);
+      notify(r.data.message);
       setShowGenModal(false); fetchFees();
     } catch (err) { notify(err.response?.data?.message || 'Error generating fees', 'error'); }
   };
@@ -86,7 +86,7 @@ export default function AdminFees() {
     a.download = `KEC_Bus_Fees_${filterMonth || 'all'}_${new Date().toISOString().slice(0, 10)}.csv`;
     a.click();
     URL.revokeObjectURL(url);
-    notify('📥 CSV exported successfully!');
+    notify('CSV exported successfully.');
   };
 
   const statusColor = { paid: 'badge-paid', pending: 'badge-pending', overdue: 'badge-overdue', waived: 'badge-waived' };
@@ -104,15 +104,14 @@ export default function AdminFees() {
       )}
       {genResult && (
         <div className="alert alert-info" style={{ marginBottom: 16 }}>
-          ℹ️ Generated: {genResult.count || 0} fee records. Students have been notified.
-          <button style={{ marginLeft: 12, background: 'none', border: 'none', cursor: 'pointer', color: 'var(--primary)', fontWeight: 700 }} onClick={() => setGenResult(null)}>✕</button>
+          Generated: {genResult.count || 0} fee records. Students have been notified.
+          <button className="btn btn-outline btn-sm" style={{ marginLeft: 12 }} onClick={() => setGenResult(null)}>Dismiss</button>
         </div>
       )}
 
       {/* Toolbar */}
       <div className="search-bar" style={{ marginBottom: 16 }}>
         <div className="search-wrap" style={{ flex: 2 }}>
-          <span className="search-icon">🔍</span>
           <input
             className="search-input"
             placeholder="Search by student name or ID..."
@@ -135,17 +134,17 @@ export default function AdminFees() {
           <option value="waived">Waived</option>
         </select>
         <button className="export-btn" onClick={exportCSV} title="Export as CSV">
-          📥 Export CSV
+          Export CSV
         </button>
         <button className="btn btn-primary" onClick={() => setShowGenModal(true)}>
-          ⚡ Generate Fees
+          Generate Fees
         </button>
       </div>
 
       <div className="card">
         <div className="card-header">
           <h3 className="card-title">
-            <span>💰</span> Fee Records
+            Fee Records
             <span style={{ fontWeight: 500, color: 'var(--text-muted)', fontSize: 13 }}>({total})</span>
           </h3>
           <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>{filterMonth || 'All months'}</span>
@@ -169,7 +168,6 @@ export default function AdminFees() {
               {fees.length === 0 ? (
                 <tr><td colSpan={9}>
                   <div className="empty-state">
-                    <span className="icon">💰</span>
                     <h3>No fee records found</h3>
                     <p>Try changing filters or generate fees for this month.</p>
                   </div>
@@ -198,9 +196,9 @@ export default function AdminFees() {
                           setSelectedFee(f);
                           setPayForm({ paymentMode: 'cash', transactionId: '', lateFee: f.lateFee || 0, discount: 0, remarks: '' });
                           setShowPayModal(true);
-                        }}>💳 Collect</button>
+                        }}>Collect</button>
                       ) : f.status === 'paid' ? (
-                        <button className="btn btn-outline btn-sm" onClick={() => { setSelectedFee(f); setShowReceiptModal(true); }}>🧾 Receipt</button>
+                        <button className="btn btn-outline btn-sm" onClick={() => { setSelectedFee(f); setShowReceiptModal(true); }}>Receipt</button>
                       ) : null}
                     </div>
                   </td>
@@ -226,8 +224,8 @@ export default function AdminFees() {
         <div className="modal-overlay" onClick={e => e.target === e.currentTarget && setShowGenModal(false)}>
           <div className="modal" style={{ maxWidth: 420 }}>
             <div className="modal-header">
-              <h3 className="modal-title">⚡ Generate Bus Fees</h3>
-              <button className="modal-close" onClick={() => setShowGenModal(false)}>×</button>
+              <h3 className="modal-title">Generate Bus Fees</h3>
+              <button className="modal-close" onClick={() => setShowGenModal(false)}>X</button>
             </div>
             <form onSubmit={handleGenerate}>
               <div className="form-group">
@@ -256,7 +254,7 @@ export default function AdminFees() {
                 <input type="date" value={genForm.dueDate} onChange={e => setGenForm({ ...genForm, dueDate: e.target.value })} required />
               </div>
               <div className="alert alert-info" style={{ marginBottom: 16, fontSize: 12 }}>
-                ℹ️ Fee records will be created for all students with an assigned bus route and matching fee type. Students will receive a notification automatically.
+                Fee records will be created for all students with an assigned bus route and matching fee type. Students will receive a notification automatically.
               </div>
               <div style={{ display: 'flex', gap: 10 }}>
                 <button type="submit" className="btn btn-primary" style={{ flex: 1, justifyContent: 'center' }}>Generate Fees</button>
@@ -272,10 +270,10 @@ export default function AdminFees() {
         <div className="modal-overlay" onClick={e => e.target === e.currentTarget && setShowPayModal(false)}>
           <div className="modal" style={{ maxWidth: 460 }}>
             <div className="modal-header">
-              <h3 className="modal-title">💳 Collect Payment</h3>
-              <button className="modal-close" onClick={() => setShowPayModal(false)}>×</button>
+              <h3 className="modal-title">Collect Payment</h3>
+              <button className="modal-close" onClick={() => setShowPayModal(false)}>X</button>
             </div>
-            <div style={{ background: 'linear-gradient(135deg, #f0f4ff, #f0fdf4)', border: '1px solid var(--border)', borderRadius: 10, padding: 16, marginBottom: 20, fontSize: 13 }}>
+            <div style={{ background: 'var(--surface-alt)', border: '1px solid var(--border)', borderRadius: 8, padding: 16, marginBottom: 20, fontSize: 13 }}>
               <div style={{ fontWeight: 700, marginBottom: 8, color: 'var(--text)' }}>Payment Details</div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
                 <span style={{ color: 'var(--text-muted)' }}>Student:</span>
@@ -322,13 +320,13 @@ export default function AdminFees() {
                 <input value={payForm.remarks} onChange={e => setPayForm({ ...payForm, remarks: e.target.value })} placeholder="Optional note" />
               </div>
               <div style={{ background: '#f0fdf4', border: '1.5px solid #86efac', borderRadius: 10, padding: 14, marginBottom: 16, textAlign: 'center' }}>
-                <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4, textTransform: 'uppercase', letterSpacing: 0.5 }}>Total Payable</div>
+                <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4, textTransform: 'uppercase', fontWeight: 800 }}>Total Payable</div>
                 <div style={{ fontWeight: 800, fontSize: 22, color: 'var(--success)' }}>
                   {fmt(Number(selectedFee.amount) + Number(payForm.lateFee) - Number(payForm.discount))}
                 </div>
               </div>
               <div style={{ display: 'flex', gap: 10 }}>
-                <button type="submit" className="btn btn-success" style={{ flex: 1, justifyContent: 'center' }}>✅ Confirm & Record Payment</button>
+                <button type="submit" className="btn btn-success" style={{ flex: 1, justifyContent: 'center' }}>Confirm & Record Payment</button>
                 <button type="button" className="btn btn-outline" onClick={() => setShowPayModal(false)}>Cancel</button>
               </div>
             </form>
@@ -341,8 +339,8 @@ export default function AdminFees() {
         <div className="modal-overlay" onClick={e => e.target === e.currentTarget && setShowReceiptModal(false)}>
           <div className="modal" style={{ maxWidth: 420 }}>
             <div className="modal-header">
-              <h3 className="modal-title">🧾 Payment Receipt</h3>
-              <button className="modal-close" onClick={() => setShowReceiptModal(false)}>×</button>
+              <h3 className="modal-title">Payment Receipt</h3>
+              <button className="modal-close" onClick={() => setShowReceiptModal(false)}>X</button>
             </div>
             <div className="receipt">
               <div className="receipt-header">
@@ -374,7 +372,7 @@ export default function AdminFees() {
               </div>
             </div>
             <button className="btn btn-primary" style={{ width: '100%', marginTop: 14, justifyContent: 'center' }} onClick={() => window.print()}>
-              🖨️ Print Receipt
+              Print Receipt
             </button>
           </div>
         </div>

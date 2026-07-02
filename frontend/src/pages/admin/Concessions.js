@@ -88,8 +88,8 @@ export default function AdminConcessions() {
         <div className="modal-overlay" onClick={() => setSelected(null)}>
           <div className="modal" onClick={e => e.stopPropagation()}>
             <div className="modal-header">
-              <h3>Review Concession — {selected.student?.user?.name}</h3>
-              <button className="modal-close" onClick={() => setSelected(null)}>×</button>
+              <h3>Review Concession - {selected.student?.user?.name}</h3>
+              <button className="modal-close" onClick={() => setSelected(null)}>X</button>
             </div>
             <div className="modal-body">
               <p><strong>Type:</strong> <span className="capitalize">{selected.concessionType.replace('_', ' ')}</span></p>
